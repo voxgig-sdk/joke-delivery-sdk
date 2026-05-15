@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "random_joke": {
+      "RANDOM_JOKE00": {
+        "id": "RANDOM_JOKE00",
+        "punchline": "s29",
+        "setup": "s2a",
+        "type": "s2b"
+      },
+      "RANDOM_JOKE01": {
+        "id": "RANDOM_JOKE01",
+        "punchline": "s51",
+        "setup": "s52",
+        "type": "s53"
+      },
+      "RANDOM_JOKE02": {
+        "id": "RANDOM_JOKE02",
+        "punchline": "s79",
+        "setup": "s7a",
+        "type": "s7b"
+      }
+    }
+  },
+  "new": {
+    "random_joke": {
+      "random_joke_ref01": {
+        "punchline": "sa1",
+        "setup": "sa2",
+        "type": "sa3"
+      }
+    }
+  }
+}

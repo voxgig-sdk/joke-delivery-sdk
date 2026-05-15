@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Joke Delivery API",
+    "description": "This API provides random jokes, making it easy for developers to integrate humor into their applications. With a simple request, you can receive various types of jokes to engage users with lighthearted content.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://official-joke-api.appspot.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://official-joke-api.appspot.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/random_joke": {
+      "get": {
+        "summary": "Get a random joke",
+        "description": "Returns a single random joke with setup and punchline",
+        "operationId": "getRandomJoke",
+        "tags": [
+          "Jokes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with a random joke",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Joke"
+                },
+                "example": {
+                  "type": "general",
+                  "setup": "What did the dog say to the two trees?",
+                  "punchline": "Bark bark.",
+                  "id": 170
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Joke": {
+        "type": "object",
+        "required": [
+          "type",
+          "setup",
+          "punchline",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The category or type of joke",
+            "example": "general"
+          },
+          "setup": {
+            "type": "string",
+            "description": "The setup or question part of the joke",
+            "example": "What did the dog say to the two trees?"
+          },
+          "punchline": {
+            "type": "string",
+            "description": "The punchline or answer part of the joke",
+            "example": "Bark bark."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the joke",
+            "example": 170
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Jokes",
+      "description": "Operations related to joke retrieval"
+    }
+  ]
+}

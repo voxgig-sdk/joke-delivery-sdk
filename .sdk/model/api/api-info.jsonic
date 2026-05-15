@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://official-joke-api.appspot.com"
+      }
+      description: "This API provides random jokes, making it easy for developers to integrate humor into their applications. With a simple request, you can receive various types of jokes to engage users with lighthearted content."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://official-joke-api.appspot.com"
+        }
+      ]
+      title: "Joke Delivery API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}
