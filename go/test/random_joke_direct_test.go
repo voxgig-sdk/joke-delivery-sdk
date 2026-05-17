@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/joke-delivery-sdk"
-	"github.com/voxgig-sdk/joke-delivery-sdk/core"
+	sdk "github.com/voxgig-sdk/joke-delivery-sdk/go"
+	"github.com/voxgig-sdk/joke-delivery-sdk/go/core"
 )
 
 func TestRandomJokeDirect(t *testing.T) {

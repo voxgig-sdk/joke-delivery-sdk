@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/joke-delivery-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/joke-delivery-sdk/core"
+	"github.com/voxgig-sdk/joke-delivery-sdk/go/core"
 )
 
 func prepareHeadersUtil(ctx *core.Context) map[string]any {

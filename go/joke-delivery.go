@@ -1,10 +1,10 @@
 package voxgigjokedeliverysdk
 
 import (
-	"github.com/voxgig-sdk/joke-delivery-sdk/core"
-	"github.com/voxgig-sdk/joke-delivery-sdk/entity"
-	"github.com/voxgig-sdk/joke-delivery-sdk/feature"
-	_ "github.com/voxgig-sdk/joke-delivery-sdk/utility"
+	"github.com/voxgig-sdk/joke-delivery-sdk/go/core"
+	"github.com/voxgig-sdk/joke-delivery-sdk/go/entity"
+	"github.com/voxgig-sdk/joke-delivery-sdk/go/feature"
+	_ "github.com/voxgig-sdk/joke-delivery-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
