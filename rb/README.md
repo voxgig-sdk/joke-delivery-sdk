@@ -31,9 +31,7 @@ loading a specific record.
 ```ruby
 require_relative "JokeDelivery_sdk"
 
-client = JokeDeliverySDK.new({
-  "apikey" => ENV["JOKE-DELIVERY_APIKEY"],
-})
+client = JokeDeliverySDK.new({})
 ```
 
 ### 3. Load a randomjoke
@@ -121,7 +119,6 @@ Create a `.env.local` file at the project root:
 
 ```
 JOKE-DELIVERY_TEST_LIVE=TRUE
-JOKE-DELIVERY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

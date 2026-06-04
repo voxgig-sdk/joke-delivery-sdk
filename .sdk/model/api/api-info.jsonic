@@ -16,8 +16,27 @@ main: {
       ]
       title: "Joke Delivery API"
       version: "1.0.0"
+      tagline: "Fetch random setup-and-punchline jokes from a free, community-contributed REST API"
+      homepage: "https://official-joke-api.appspot.com"
+      docs_url: "https://github.com/15Dkatz/official_joke_api"
+      license_short: "MIT License (per upstream GitHub repository)"
+      license_md: `- Upstream project [\`15Dkatz/official_joke_api\`](https://github.com/15Dkatz/official_joke_api) is published under the MIT License.
+- Jokes were contributed by volunteers; the upstream README notes that "the majority of these jokes were contributed by joke-loving coders around the world."
+- No attribution string is mandated by the API itself, but crediting the upstream project is courteous.
+- This SDK is an independent client and is not affiliated with the upstream project.`
+      about_md: `The [Joke Delivery API](https://official-joke-api.appspot.com) is a small, free REST service that returns random jokes in JSON form. It is maintained by [David Katz](https://github.com/15Dkatz) and the open-source contributors of the [\`official_joke_api\`](https://github.com/15Dkatz/official_joke_api) project, and is hosted on Google App Engine.
+
+What you get from the API:
+
+- Single random jokes via \`GET /random_joke\`
+- Each joke is an object with \`id\`, \`type\`, \`setup\`, and \`punchline\` fields
+- Joke categories such as \`programming\` and \`general\` (the upstream repo also documents \`/jokes/:type/random\` and \`/jokes/:id\`)
+
+The service requires no API key or authentication and CORS is enabled, so it can be called directly from browser code. No official rate limits are published; treat it as a best-effort community endpoint and cache responses where practical.`
+      entity_desc: {
+        random_joke: "A single randomly selected joke returned from `GET /random_joke`, with `setup`, `punchline`, `type`, and `id` fields."
+      }
+      auth: false
     }
   }
-}
-
 }
