@@ -10,7 +10,7 @@ The Python SDK for the JokeDelivery API — an entity-oriented client following 
 
 ## Install
 ```bash
-pip install joke-delivery-sdk
+pip install voxgig-sdk-joke-delivery
 ```
 
 Or install from source:

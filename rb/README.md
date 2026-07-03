@@ -10,13 +10,13 @@ The Ruby SDK for the JokeDelivery API — an entity-oriented client using idioma
 
 ## Install
 ```bash
-gem install joke-delivery-sdk
+gem install voxgig-sdk-joke-delivery
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "joke-delivery-sdk"
+gem "voxgig-sdk-joke-delivery"
 ```
 
 Then run:

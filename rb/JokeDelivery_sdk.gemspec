@@ -2,9 +2,17 @@ Gem::Specification.new do |spec|
   spec.name          = "voxgig-sdk-joke-delivery"
   spec.version       = "0.0.1"
   spec.authors       = ["Voxgig"]
-  spec.summary       = "JokeDelivery SDK for Ruby"
+  spec.summary       = "Unofficial generated Ruby SDK for the Joke Delivery public API. Not affiliated with or endorsed by the upstream API provider."
+  spec.description   = "Unofficial generated Ruby SDK for the Joke Delivery public API. Not affiliated with or endorsed by the upstream API provider."
   spec.license       = "MIT"
   spec.homepage      = "https://github.com/voxgig-sdk/joke-delivery-sdk"
+  spec.metadata      = {
+    "homepage_uri"          => "https://github.com/voxgig-sdk/joke-delivery-sdk",
+    "source_code_uri"       => "https://github.com/voxgig-sdk/joke-delivery-sdk",
+    "bug_tracker_uri"       => "https://github.com/voxgig-sdk/joke-delivery-sdk/issues",
+    "changelog_uri"         => "https://github.com/voxgig-sdk/joke-delivery-sdk/blob/main/CHANGELOG.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   spec.files         = Dir["lib/**/*.rb", "*.rb"]
   spec.require_paths = ["."]

@@ -10,7 +10,7 @@ The Lua SDK for the JokeDelivery API — an entity-oriented client using Lua con
 
 ## Install
 ```bash
-luarocks install joke-delivery-sdk
+luarocks install voxgig-sdk-joke-delivery
 ```
 
 If the module is not yet published, add the source directory to

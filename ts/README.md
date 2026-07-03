@@ -10,7 +10,7 @@ The TypeScript SDK for the JokeDelivery API — a type-safe, entity-oriented cli
 
 ## Install
 ```bash
-npm install joke-delivery
+npm install @voxgig-sdk/joke-delivery
 ```
 ## Tutorial: your first API call
 

@@ -10,7 +10,7 @@ The PHP SDK for the JokeDelivery API — an entity-oriented client using PHP con
 
 ## Install
 ```bash
-composer require voxgig/joke-delivery-sdk
+composer require voxgig-sdk/joke-delivery
 ```
 
 
