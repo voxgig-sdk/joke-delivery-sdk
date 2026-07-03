@@ -99,12 +99,14 @@ func random_jokeDirectSetup(mockres any) *random_jokeDirectSetupResult {
 	env := envOverride(map[string]any{
 		"JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID": map[string]any{},
 		"JOKEDELIVERY_TEST_LIVE":    "FALSE",
+		"JOKEDELIVERY_APIKEY":       "NONE",
 	})
 
 	live := env["JOKEDELIVERY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["JOKEDELIVERY_APIKEY"],
 		}
 		client := sdk.NewJokeDeliverySDK(mergedOpts)
 

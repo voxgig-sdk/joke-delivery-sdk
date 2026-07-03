@@ -89,6 +89,7 @@ function random_joke_basic_setup($extra)
         "JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID" => $idmap,
         "JOKEDELIVERY_TEST_LIVE" => "FALSE",
         "JOKEDELIVERY_TEST_EXPLAIN" => "FALSE",
+        "JOKEDELIVERY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -100,6 +101,7 @@ function random_joke_basic_setup($extra)
     if ($env["JOKEDELIVERY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["JOKEDELIVERY_APIKEY"],
             ],
             $extra ?? [],
         ]);

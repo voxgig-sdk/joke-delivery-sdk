@@ -1,6 +1,11 @@
 # JokeDelivery Lua SDK
 
-The Lua SDK for the JokeDelivery API. Provides an entity-oriented interface using Lua conventions.
+
+
+The Lua SDK for the JokeDelivery API — an entity-oriented client using Lua conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -26,13 +31,15 @@ loading a specific record.
 ```lua
 local sdk = require("joke-delivery_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("JOKE-DELIVERY_APIKEY"),
+})
 ```
 
 ### 3. Load a randomjoke
 
 ```lua
-local result, err = client:RandomJoke(nil):load({ id = "example_id" }, nil)
+local result, err = client:RandomJoke():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -78,11 +85,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 
-local result, err = client:JokeDelivery(nil):load(
-  { id = "test01" }, nil
-)
+local result, err = client:JokeDelivery():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -116,6 +121,7 @@ Create a `.env.local` file at the project root:
 
 ```
 JOKE-DELIVERY_TEST_LIVE=TRUE
+JOKE-DELIVERY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -138,6 +144,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

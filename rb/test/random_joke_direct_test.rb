@@ -61,12 +61,14 @@ def random_joke_direct_setup(mockres)
   env = Runner.env_override({
     "JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID" => {},
     "JOKEDELIVERY_TEST_LIVE" => "FALSE",
+    "JOKEDELIVERY_APIKEY" => "NONE",
   })
 
   live = env["JOKEDELIVERY_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["JOKEDELIVERY_APIKEY"],
     }
     client = JokeDeliverySDK.new(merged_opts)
     return {

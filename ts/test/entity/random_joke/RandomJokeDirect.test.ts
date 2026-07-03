@@ -74,12 +74,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID': {},
     'JOKEDELIVERY_TEST_LIVE': 'FALSE',
+    'JOKEDELIVERY_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.JOKEDELIVERY_TEST_LIVE
 
   if (live) {
     const client = new JokeDeliverySDK({
+      apikey: env.JOKEDELIVERY_APIKEY,
     })
 
     let idmap: any = env['JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID']

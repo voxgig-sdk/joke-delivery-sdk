@@ -1,6 +1,11 @@
 # JokeDelivery Python SDK
 
-The Python SDK for the JokeDelivery API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the JokeDelivery API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from jokedelivery_sdk import JokeDeliverySDK
 
-client = JokeDeliverySDK({})
+client = JokeDeliverySDK({
+    "apikey": os.environ.get("JOKE-DELIVERY_APIKEY"),
+})
 ```
 
 ### 3. Load a randomjoke
 
 ```python
-result, err = client.RandomJoke(None).load({"id": "example_id"}, None)
+result, err = client.RandomJoke().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -79,11 +87,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = JokeDeliverySDK.test(None, None)
+client = JokeDeliverySDK.test()
 
-result, err = client.JokeDelivery(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.JokeDelivery().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -114,6 +120,7 @@ Create a `.env.local` file at the project root:
 
 ```
 JOKE-DELIVERY_TEST_LIVE=TRUE
+JOKE-DELIVERY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -137,6 +144,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

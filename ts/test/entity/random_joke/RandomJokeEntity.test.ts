@@ -114,6 +114,7 @@ function basicSetup(extra?: any) {
     'JOKE_DELIVERY_TEST_RANDOM_JOKE_ENTID': idmap,
     'JOKE_DELIVERY_TEST_LIVE': 'FALSE',
     'JOKE_DELIVERY_TEST_EXPLAIN': 'FALSE',
+    'JOKE_DELIVERY_APIKEY': 'NONE',
   })
 
   idmap = env['JOKE_DELIVERY_TEST_RANDOM_JOKE_ENTID']
@@ -123,6 +124,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new JokeDeliverySDK(merge([
       {
+        apikey: env.JOKE_DELIVERY_APIKEY,
       },
       extra
     ]))

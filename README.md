@@ -1,20 +1,8 @@
 # JokeDelivery SDK
 
-Fetch random setup-and-punchline jokes from a free, community-contributed REST API
+Joke Delivery API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Joke Delivery API
-
-The [Joke Delivery API](https://official-joke-api.appspot.com) is a small, free REST service that returns random jokes in JSON form. It is maintained by [David Katz](https://github.com/15Dkatz) and the open-source contributors of the [`official_joke_api`](https://github.com/15Dkatz/official_joke_api) project, and is hosted on Google App Engine.
-
-What you get from the API:
-
-- Single random jokes via `GET /random_joke`
-- Each joke is an object with `id`, `type`, `setup`, and `punchline` fields
-- Joke categories such as `programming` and `general` (the upstream repo also documents `/jokes/:type/random` and `/jokes/:id`)
-
-The service requires no API key or authentication and CORS is enabled, so it can be called directly from browser code. No official rate limits are published; treat it as a best-effort community endpoint and cache responses where practical.
 
 ## Try it
 
@@ -48,27 +36,31 @@ gem install joke-delivery-sdk
 luarocks install joke-delivery-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { JokeDeliverySDK } from 'joke-delivery'
 
-const client = new JokeDeliverySDK({})
+const client = new JokeDeliverySDK({
+  apikey: process.env.JOKE-DELIVERY_APIKEY,
+})
 
+// Load randomjoke data
+const randomjoke = await client.RandomJoke().load({})
+console.log(randomjoke.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -98,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **RandomJoke** | A single randomly selected joke returned from `GET /random_joke`, with `setup`, `punchline`, `type`, and `id` fields. | `/random_joke` |
+| **RandomJoke** |  | `/random_joke` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -108,15 +100,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from jokedelivery_sdk import JokeDeliverySDK
 
-client = JokeDeliverySDK({})
+client = JokeDeliverySDK({
+    "apikey": os.environ.get("JOKE-DELIVERY_APIKEY"),
+})
 
 
 # Load a specific randomjoke
-randomjoke, err = client.RandomJoke(None).load(
-    {"id": "example_id"}, None
-)
+randomjoke, err = client.RandomJoke().load({"id": "example_id"})
+print(randomjoke)
 ```
 
 ### PHP
@@ -125,13 +119,14 @@ randomjoke, err = client.RandomJoke(None).load(
 <?php
 require_once 'jokedelivery_sdk.php';
 
-$client = new JokeDeliverySDK([]);
+$client = new JokeDeliverySDK([
+    "apikey" => getenv("JOKE-DELIVERY_APIKEY"),
+]);
 
 
 // Load a specific randomjoke
-[$randomjoke, $err] = $client->RandomJoke(null)->load(
-    ["id" => "example_id"], null
-);
+[$randomjoke, $err] = $client->RandomJoke()->load(["id" => "example_id"]);
+print_r($randomjoke);
 ```
 
 ### Golang
@@ -139,8 +134,13 @@ $client = new JokeDeliverySDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/joke-delivery-sdk/go"
 
-client := sdk.NewJokeDeliverySDK(map[string]any{})
+client := sdk.NewJokeDeliverySDK(map[string]any{
+    "apikey": os.Getenv("JOKE-DELIVERY_APIKEY"),
+})
 
+// Load randomjoke data
+randomjoke, err := client.RandomJoke(nil).Load(map[string]any{}, nil)
+fmt.Println(randomjoke)
 ```
 
 ### Ruby
@@ -148,13 +148,14 @@ client := sdk.NewJokeDeliverySDK(map[string]any{})
 ```ruby
 require_relative "JokeDelivery_sdk"
 
-client = JokeDeliverySDK.new({})
+client = JokeDeliverySDK.new({
+  "apikey" => ENV["JOKE-DELIVERY_APIKEY"],
+})
 
 
 # Load a specific randomjoke
-randomjoke, err = client.RandomJoke(nil).load(
-  { "id" => "example_id" }, nil
-)
+randomjoke, err = client.RandomJoke().load({ "id" => "example_id" })
+puts randomjoke
 ```
 
 ### Lua
@@ -162,13 +163,14 @@ randomjoke, err = client.RandomJoke(nil).load(
 ```lua
 local sdk = require("joke-delivery_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("JOKE-DELIVERY_APIKEY"),
+})
 
 
 -- Load a specific randomjoke
-local randomjoke, err = client:RandomJoke(nil):load(
-  { id = "example_id" }, nil
-)
+local randomjoke, err = client:RandomJoke():load({ id = "example_id" })
+print(randomjoke)
 ```
 
 ## Unit testing in offline mode
@@ -187,25 +189,21 @@ const result = await client.RandomJoke().load({ id: 'test01' })
 ### Python
 
 ```python
-client = JokeDeliverySDK.test(None, None)
-result, err = client.RandomJoke(None).load(
-    {"id": "test01"}, None
-)
+client = JokeDeliverySDK.test()
+result, err = client.RandomJoke().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = JokeDeliverySDK::test(null, null);
-[$result, $err] = $client->RandomJoke(null)->load(
-    ["id" => "test01"], null
-);
+$client = JokeDeliverySDK::test();
+[$result, $err] = $client->RandomJoke()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.RandomJoke(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -214,19 +212,15 @@ result, err := client.RandomJoke(nil).Load(
 ### Ruby
 
 ```ruby
-client = JokeDeliverySDK.test(nil, nil)
-result, err = client.RandomJoke(nil).load(
-  { "id" => "test01" }, nil
-)
+client = JokeDeliverySDK.test
+result, err = client.RandomJoke().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:RandomJoke(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:RandomJoke():load({ id = "test01" })
 ```
 
 ## How it works
@@ -330,16 +324,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Joke Delivery API
-
-- Upstream: [https://official-joke-api.appspot.com](https://official-joke-api.appspot.com)
-- API docs: [https://github.com/15Dkatz/official_joke_api](https://github.com/15Dkatz/official_joke_api)
-
-- Upstream project [`15Dkatz/official_joke_api`](https://github.com/15Dkatz/official_joke_api) is published under the MIT License.
-- Jokes were contributed by volunteers; the upstream README notes that "the majority of these jokes were contributed by joke-loving coders around the world."
-- No attribution string is mandated by the API itself, but crediting the upstream project is courteous.
-- This SDK is an independent client and is not affiliated with the upstream project.
 
 ---
 
