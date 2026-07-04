@@ -26,9 +26,9 @@ import { JokeDeliverySDK } from '@voxgig-sdk/joke-delivery'
 
 const client = new JokeDeliverySDK()
 
-// Load randomjoke data
-const randomjoke = await client.randomjoke.load({})
-console.log(randomjoke.data)
+// Load randomjoke data (returns a RandomJoke)
+const randomjoke = await client.RandomJoke().load()
+console.log(randomjoke)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -84,8 +84,8 @@ from jokedelivery_sdk import JokeDeliverySDK
 client = JokeDeliverySDK()
 
 
-# Load a specific randomjoke
-randomjoke = client.randomjoke.load({"id": "example_id"})
+# Load a specific randomjoke (returns the record, raises on error)
+randomjoke = client.RandomJoke().load({"id": "example_id"})
 print(randomjoke)
 ```
 
@@ -98,8 +98,8 @@ require_once 'jokedelivery_sdk.php';
 $client = new JokeDeliverySDK();
 
 
-// Load a specific randomjoke
-$randomjoke = $client->randomjoke()->load(["id" => "example_id"]);
+// Load a specific randomjoke (returns the bare record; throws on error)
+$randomjoke = $client->RandomJoke()->load(["id" => "example_id"]);
 print_r($randomjoke);
 ```
 
@@ -123,8 +123,8 @@ require_relative "JokeDelivery_sdk"
 client = JokeDeliverySDK.new
 
 
-# Load a specific randomjoke
-randomjoke = client.randomjoke.load({ "id" => "example_id" })
+# Load a specific randomjoke (returns the bare record; raises on error)
+randomjoke = client.RandomJoke.load({ "id" => "example_id" })
 puts randomjoke
 ```
 
@@ -137,7 +137,7 @@ local client = sdk.new()
 
 
 -- Load a specific randomjoke
-local randomjoke, err = client:randomjoke():load({ id = "example_id" })
+local randomjoke, err = client:RandomJoke():load({ id = "example_id" })
 print(randomjoke)
 ```
 
@@ -150,22 +150,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = JokeDeliverySDK.test()
-const result = await client.randomjoke.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const randomjoke = await client.RandomJoke().load({ id: 1 })
+// randomjoke is a bare RandomJoke populated with mock data
+console.log(randomjoke)
 ```
 
 ### Python
 
 ```python
 client = JokeDeliverySDK.test()
-result = client.randomjoke.load({"id": "test01"})
+randomjoke = client.RandomJoke().load({"id": "test01"})
+print(randomjoke)
 ```
 
 ### PHP
 
 ```php
-$client = JokeDeliverySDK::test();
-$result = $client->randomjoke()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = JokeDeliverySDK::test([
+    "entity" => ["randomjoke" => ["test01" => ["id" => "test01"]]],
+]);
+$randomjoke = $client->RandomJoke()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -180,15 +185,18 @@ result, err := client.RandomJoke(nil).Load(
 ### Ruby
 
 ```ruby
-client = JokeDeliverySDK.test
-result = client.randomjoke.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = JokeDeliverySDK.test({
+  "entity" => { "randomjoke" => { "test01" => { "id" => "test01" } } },
+})
+randomjoke = client.RandomJoke.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:randomjoke():load({ id = "test01" })
+local result, err = client:RandomJoke():load({ id = "test01" })
 ```
 
 ## How it works
@@ -236,6 +244,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

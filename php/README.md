@@ -33,9 +33,10 @@ $client = new JokeDeliverySDK();
 
 ```php
 try {
-    $result = $client->randomjoke()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare RandomJoke record (throws on error).
+    $randomjoke = $client->RandomJoke()->load(["id" => "example_id"]);
+    print_r($randomjoke);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -81,13 +82,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = JokeDeliverySDK::test();
+$client = JokeDeliverySDK::test([
+    "entity" => ["randomjoke" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->randomjoke()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$randomjoke = $client->RandomJoke()->load(["id" => "test01"]);
+print_r($randomjoke);
 ```
 
 ### Use a custom fetch function
@@ -226,7 +231,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `const random_joke = client.random_joke`
+Create an instance: `$random_joke = $client->RandomJoke();`
 
 #### Operations
 
@@ -245,8 +250,9 @@ Create an instance: `const random_joke = client.random_joke`
 
 #### Example: Load
 
-```ts
-const random_joke = await client.random_joke.load({ id: 'random_joke_id' })
+```php
+// load() returns the bare RandomJoke record (throws on error).
+$random_joke = $client->RandomJoke()->load(["id" => "random_joke_id"]);
 ```
 
 
@@ -321,7 +327,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$randomjoke = $client->randomjoke();
+$randomjoke = $client->RandomJoke();
 $randomjoke->load(["id" => "example_id"]);
 
 // $randomjoke->dataGet() now returns the loaded randomjoke data

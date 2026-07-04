@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:random_joke():list() / client:random_joke():load({ id = ... })
-function JokeDeliverySDK:random_joke(data)
+-- Idiomatic facade: client:RandomJoke():list() / client:RandomJoke():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function JokeDeliverySDK:RandomJoke(data)
   local EntityMod = require("entity.random_joke_entity")
   if data == nil then
     if self._random_joke == nil then
@@ -253,12 +254,6 @@ function JokeDeliverySDK:random_joke(data)
     end
     return self._random_joke
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:random_joke() instead.
-function JokeDeliverySDK:RandomJoke(data)
-  local EntityMod = require("entity.random_joke_entity")
   return EntityMod.new(self, data)
 end
 

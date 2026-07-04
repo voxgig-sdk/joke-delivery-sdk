@@ -109,7 +109,7 @@ Alias for `JokeDeliverySDK.test()`.
 ## RandomJokeEntity
 
 ```ts
-const random_joke = client.random_joke
+const random_joke = client.RandomJoke()
 ```
 
 ### Fields
@@ -128,7 +128,7 @@ const random_joke = client.random_joke
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.random_joke.load({ id: 'random_joke_id' })
+const result = await client.RandomJoke().load({ id: 'random_joke_id' })
 ```
 
 ### Common Methods

@@ -85,7 +85,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## RandomJokeEntity
 
 ```php
-$random_joke = $client->random_joke();
+$random_joke = $client->RandomJoke();
 ```
 
 ### Fields
@@ -104,7 +104,7 @@ $random_joke = $client->random_joke();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->random_joke()->load(["id" => "random_joke_id"]);
+$result = $client->RandomJoke()->load(["id" => "random_joke_id"]);
 ```
 
 ### Common Methods

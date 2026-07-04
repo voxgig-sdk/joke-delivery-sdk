@@ -32,8 +32,9 @@ client = JokeDeliverySDK.new
 
 ```ruby
 begin
-  result = client.randomjoke.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare RandomJoke record (raises on error).
+  randomjoke = client.RandomJoke.load({ "id" => "example_id" })
+  puts randomjoke
 rescue => err
   warn "load failed: #{err}"
 end
@@ -80,13 +81,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = JokeDeliverySDK.test
+client = JokeDeliverySDK.test({
+  "entity" => { "randomjoke" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.randomjoke.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+randomjoke = client.RandomJoke.load({ "id" => "test01" })
+puts randomjoke
 ```
 
 ### Use a custom fetch function
@@ -221,7 +226,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `const random_joke = client.random_joke`
+Create an instance: `random_joke = client.RandomJoke`
 
 #### Operations
 
@@ -240,8 +245,9 @@ Create an instance: `const random_joke = client.random_joke`
 
 #### Example: Load
 
-```ts
-const random_joke = await client.random_joke.load({ id: 'random_joke_id' })
+```ruby
+# load returns the bare RandomJoke record (raises on error).
+random_joke = client.RandomJoke.load({ "id" => "random_joke_id" })
 ```
 
 
@@ -316,7 +322,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-randomjoke = client.randomjoke
+randomjoke = client.RandomJoke
 randomjoke.load({ "id" => "example_id" })
 
 # randomjoke.data_get now returns the loaded randomjoke data

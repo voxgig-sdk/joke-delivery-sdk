@@ -220,25 +220,15 @@ class JokeDeliverySDK:
         }
 
 
-    @property
-    def random_joke(self):
-        """Idiomatic facade: client.random_joke.list() / client.random_joke.load({"id": ...})."""
-        from entity.random_joke_entity import RandomJokeEntity
-        cached = getattr(self, "_random_joke", None)
-        if cached is None:
-            cached = RandomJokeEntity(self, None)
-            self._random_joke = cached
-        return cached
-
-    def RandomJoke(self, data=None):
-        # Deprecated: use client.random_joke instead.
+    def RandomJoke(self, data=None) -> "RandomJokeEntity":
+        """Entity factory: client.RandomJoke().list({}) / client.RandomJoke().load({"id": ...})."""
         from entity.random_joke_entity import RandomJokeEntity
         return RandomJokeEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "JokeDeliverySDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class JokeDeliverySDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.random_joke_entity import RandomJokeEntity

@@ -86,7 +86,7 @@ same parameters as `direct()`. Raises on error.
 ## RandomJokeEntity
 
 ```ruby
-random_joke = client.random_joke
+random_joke = client.RandomJoke
 ```
 
 ### Fields
@@ -105,7 +105,7 @@ random_joke = client.random_joke
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.random_joke.load({ "id" => "random_joke_id" })
+result = client.RandomJoke.load({ "id" => "random_joke_id" })
 ```
 
 ### Common Methods

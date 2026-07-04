@@ -208,13 +208,7 @@ class JokeDeliverySDK
   end
 
 
-  # Idiomatic facade: client.random_joke.list / client.random_joke.load({ "id" => ... })
-  def random_joke
-    require_relative 'entity/random_joke_entity'
-    @random_joke ||= RandomJokeEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.random_joke instead.
+  # Canonical facade: client.RandomJoke.list / client.RandomJoke.load({ "id" => ... })
   def RandomJoke(data = nil)
     require_relative 'entity/random_joke_entity'
     RandomJokeEntity.new(self, data)

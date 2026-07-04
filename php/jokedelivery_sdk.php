@@ -233,10 +233,10 @@ class JokeDeliverySDK
 
     private $_random_joke = null;
 
-    // Idiomatic facade: $client->random_joke()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias RandomJoke() (PHP method
-    // names are case-insensitive).
-    public function random_joke($data = null)
+    // Canonical facade: $client->RandomJoke()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->random_joke()
+    // resolves here too.
+    public function RandomJoke($data = null)
     {
         require_once __DIR__ . '/entity/random_joke_entity.php';
         if ($data === null) {

@@ -33,10 +33,12 @@ client = JokeDeliverySDK()
 
 ### 3. Load a randomjoke
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.randomjoke.load({"id": "example_id"})
-    print(result)
+    randomjoke = client.RandomJoke().load({"id": "example_id"})
+    print(randomjoke)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -84,8 +86,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = JokeDeliverySDK.test()
 
-result = client.randomjoke.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+randomjoke = client.RandomJoke().load({"id": "test01"})
+# randomjoke contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -221,7 +224,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `const random_joke = client.random_joke`
+Create an instance: `random_joke = client.RandomJoke()`
 
 #### Operations
 
@@ -240,8 +243,8 @@ Create an instance: `const random_joke = client.random_joke`
 
 #### Example: Load
 
-```ts
-const random_joke = await client.random_joke.load({ id: 'random_joke_id' })
+```python
+random_joke = client.RandomJoke().load({"id": "random_joke_id"})
 ```
 
 
@@ -315,7 +318,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-randomjoke = client.randomjoke
+randomjoke = client.RandomJoke()
 randomjoke.load({"id": "example_id"})
 
 # randomjoke.data_get() now returns the loaded randomjoke data

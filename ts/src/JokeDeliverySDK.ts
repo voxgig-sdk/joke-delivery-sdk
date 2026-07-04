@@ -204,14 +204,7 @@ class JokeDeliverySDK {
 
 
 
-  _random_joke?: RandomJokeEntity
-
-  // Idiomatic facade: `client.random_joke.list()` / `client.random_joke.load({ id })`.
-  get random_joke(): RandomJokeEntity {
-    return (this._random_joke ??= new RandomJokeEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.random_joke` instead. */
+  // Entity access: `client.RandomJoke().list()` / `client.RandomJoke().load({ id })`.
   RandomJoke(data?: any) {
     const self = this
     return new RandomJokeEntity(self,data)

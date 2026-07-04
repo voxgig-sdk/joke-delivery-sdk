@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## RandomJokeEntity
 
 ```python
-random_joke = client.random_joke
+random_joke = client.RandomJoke()
 ```
 
 ### Fields
@@ -99,7 +99,7 @@ random_joke = client.random_joke
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.random_joke.load({"id": "random_joke_id"})
+result = client.RandomJoke().load({"id": "random_joke_id"})
 ```
 
 ### Common Methods
