@@ -245,6 +245,9 @@ func (sdk *JokeDeliverySDK) Direct(fetchargs map[string]any) (map[string]any, er
 }
 
 
+// RandomJoke returns a RandomJoke entity bound to this client.
+// Idiomatic usage: client.RandomJoke(nil).List(nil, nil) or
+// client.RandomJoke(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *JokeDeliverySDK) RandomJoke(data map[string]any) JokeDeliveryEntity {
 	return NewRandomJokeEntityFunc(sdk, data)
 }

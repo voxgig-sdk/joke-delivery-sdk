@@ -85,6 +85,27 @@ func (e *RandomJokeEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an RandomJoke; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *RandomJokeEntity) DataTyped(data ...RandomJoke) RandomJoke {
+	if len(data) > 0 {
+		return typedFrom[RandomJoke](e.Data(asMap(data[0])))
+	}
+	return typedFrom[RandomJoke](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through RandomJoke (all fields
+// optional at the wire level).
+func (e *RandomJokeEntity) MatchTyped(match ...RandomJoke) RandomJoke {
+	if len(match) > 0 {
+		return typedFrom[RandomJoke](e.Match(asMap(match[0])))
+	}
+	return typedFrom[RandomJoke](e.Match())
+}
+
 
 func (e *RandomJokeEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *RandomJokeEntity) Load(reqmatch map[string]any, ctrl map[string]any) (a
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// RandomJokeLoadMatch and returns an RandomJoke. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *RandomJokeEntity) LoadTyped(reqmatch RandomJokeLoadMatch, ctrl map[string]any) (RandomJoke, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return RandomJoke{}, err
+	}
+	return typedFrom[RandomJoke](res), nil
 }
 
 

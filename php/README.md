@@ -9,9 +9,10 @@ The PHP SDK for the JokeDelivery API — an entity-oriented client using PHP con
 
 
 ## Install
-```bash
-composer require voxgig-sdk/joke-delivery
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/joke-delivery-sdk/releases](https://github.com/voxgig-sdk/joke-delivery-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,17 +26,18 @@ loading a specific record.
 <?php
 require_once 'jokedelivery_sdk.php';
 
-$client = new JokeDeliverySDK([
-    "apikey" => getenv("JOKE-DELIVERY_APIKEY"),
-]);
+$client = new JokeDeliverySDK();
 ```
 
 ### 3. Load a randomjoke
 
 ```php
-[$result, $err] = $client->RandomJoke()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->randomjoke()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -46,28 +48,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +86,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = JokeDeliverySDK::test();
 
-[$result, $err] = $client->JokeDelivery()->load(["id" => "test01"]);
+$result = $client->randomjoke()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +120,7 @@ $client = new JokeDeliverySDK([
 Create a `.env.local` file at the project root:
 
 ```
-JOKE-DELIVERY_TEST_LIVE=TRUE
-JOKE-DELIVERY_APIKEY=<your-key>
+JOKE_DELIVERY_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -139,7 +143,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -185,8 +188,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -219,7 +226,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `const random_joke = client.RandomJoke()`
+Create an instance: `const random_joke = client.random_joke`
 
 #### Operations
 
@@ -239,7 +246,7 @@ Create an instance: `const random_joke = client.RandomJoke()`
 #### Example: Load
 
 ```ts
-const random_joke = await client.RandomJoke().load({ id: 'random_joke_id' })
+const random_joke = await client.random_joke.load({ id: 'random_joke_id' })
 ```
 
 
@@ -314,11 +321,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$randomjoke = $client->randomjoke();
+$randomjoke->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $randomjoke->dataGet() now returns the loaded randomjoke data
+// $randomjoke->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

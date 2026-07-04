@@ -9,9 +9,12 @@ The TypeScript SDK for the JokeDelivery API — a type-safe, entity-oriented cli
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/joke-delivery
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/joke-delivery-sdk/releases](https://github.com/voxgig-sdk/joke-delivery-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { JokeDeliverySDK } from 'joke-delivery'
+import { JokeDeliverySDK } from '@voxgig-sdk/joke-delivery'
 
-const client = new JokeDeliverySDK({
-  apikey: process.env.JOKE-DELIVERY_APIKEY,
-})
+const client = new JokeDeliverySDK()
 ```
 
 ### 3. Load a randomjoke
 
 ```ts
-const result = await client.RandomJoke().load({ id: 'example_id' })
+const result = await client.randomjoke.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = JokeDeliverySDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.randomjoke.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new JokeDeliverySDK({ apikey: '...' })
+const client = new JokeDeliverySDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.randomjoke
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new JokeDeliverySDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -133,8 +133,7 @@ const client = new JokeDeliverySDK({
 Create a `.env.local` file at the project root:
 
 ```
-JOKE-DELIVERY_TEST_LIVE=TRUE
-JOKE-DELIVERY_APIKEY=<your-key>
+JOKE_DELIVERY_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new JokeDeliverySDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new JokeDeliverySDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -269,7 +266,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `const random_joke = client.RandomJoke()`
+Create an instance: `const random_joke = client.random_joke`
 
 #### Operations
 
@@ -289,7 +286,7 @@ Create an instance: `const random_joke = client.RandomJoke()`
 #### Example: Load
 
 ```ts
-const random_joke = await client.RandomJoke().load({ id: 'random_joke_id' })
+const random_joke = await client.random_joke.load({ id: 'random_joke_id' })
 ```
 
 
@@ -350,7 +347,7 @@ joke-delivery/
 Import the SDK from the package root:
 
 ```ts
-import { JokeDeliverySDK } from 'joke-delivery'
+import { JokeDeliverySDK } from '@voxgig-sdk/joke-delivery'
 ```
 
 ### Entity state
@@ -360,11 +357,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const randomjoke = client.randomjoke
+await randomjoke.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// randomjoke.data() now returns the loaded randomjoke data
+// randomjoke.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

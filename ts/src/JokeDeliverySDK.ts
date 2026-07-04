@@ -2,6 +2,8 @@
 
 import { RandomJokeEntity } from './entity/RandomJokeEntity'
 
+export type * from './JokeDeliveryTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class JokeDeliverySDK {
 
 
 
+  _random_joke?: RandomJokeEntity
+
+  // Idiomatic facade: `client.random_joke.list()` / `client.random_joke.load({ id })`.
+  get random_joke(): RandomJokeEntity {
+    return (this._random_joke ??= new RandomJokeEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.random_joke` instead. */
   RandomJoke(data?: any) {
     const self = this
     return new RandomJokeEntity(self,data)

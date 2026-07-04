@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -110,7 +109,7 @@ Alias for `JokeDeliverySDK.test()`.
 ## RandomJokeEntity
 
 ```ts
-const random_joke = client.RandomJoke()
+const random_joke = client.random_joke
 ```
 
 ### Fields
@@ -129,7 +128,7 @@ const random_joke = client.RandomJoke()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.RandomJoke().load({ id: 'random_joke_id' })
+const result = await client.random_joke.load({ id: 'random_joke_id' })
 ```
 
 ### Common Methods

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  RandomJoke,
+  RandomJokeLoadMatch,
+} from '../JokeDeliveryTypes'
 
 // TODO: needs Entity superclass
-class RandomJokeEntity extends JokeDeliveryEntityBase {
+class RandomJokeEntity extends JokeDeliveryEntityBase<RandomJoke> {
 
   constructor(client: JokeDeliverySDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class RandomJokeEntity extends JokeDeliveryEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: RandomJokeLoadMatch, ctrl?: Control): Promise<RandomJoke> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class RandomJokeEntity extends JokeDeliveryEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<RandomJoke> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

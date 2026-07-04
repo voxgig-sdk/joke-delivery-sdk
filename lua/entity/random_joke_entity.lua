@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch RandomJokeLoadMatch
+---@param ctrl? table
+---@return RandomJoke
+---@return string? err
 function RandomJokeEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

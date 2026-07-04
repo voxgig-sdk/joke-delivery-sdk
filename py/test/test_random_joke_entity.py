@@ -51,8 +51,7 @@ class TestRandomJokeEntity:
         random_joke_ref01_match_dt0 = {
             "id": random_joke_ref01_data["id"],
         }
-        random_joke_ref01_data_dt0_loaded, err = random_joke_ref01_ent.load(random_joke_ref01_match_dt0, None)
-        assert err is None
+        random_joke_ref01_data_dt0_loaded = random_joke_ref01_ent.load(random_joke_ref01_match_dt0, None)
         random_joke_ref01_data_dt0_load_result = helpers.to_map(random_joke_ref01_data_dt0_loaded)
         assert random_joke_ref01_data_dt0_load_result is not None
         assert random_joke_ref01_data_dt0_load_result["id"] == random_joke_ref01_data["id"]
@@ -95,7 +94,6 @@ def _random_joke_basic_setup(extra):
         "JOKEDELIVERY_TEST_RANDOM_JOKE_ENTID": idmap,
         "JOKEDELIVERY_TEST_LIVE": "FALSE",
         "JOKEDELIVERY_TEST_EXPLAIN": "FALSE",
-        "JOKEDELIVERY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _random_joke_basic_setup(extra):
     if env.get("JOKEDELIVERY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("JOKEDELIVERY_APIKEY"),
             },
             extra or {},
         ])
