@@ -221,7 +221,7 @@ class JokeDeliverySDK:
 
 
     def RandomJoke(self, data=None) -> "RandomJokeEntity":
-        """Entity factory: client.RandomJoke().list({}) / client.RandomJoke().load({"id": ...})."""
+        """Entity factory: client.RandomJoke().list() / client.RandomJoke().load({"id": ...})."""
         from entity.random_joke_entity import RandomJokeEntity
         return RandomJokeEntity(self, data)
 

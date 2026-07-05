@@ -8,7 +8,7 @@ Complete API reference for the JokeDelivery Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'joke-delivery_sdk'
+require_relative 'JokeDelivery_sdk'
 
 client = JokeDeliverySDK.new(options)
 ```
@@ -93,10 +93,10 @@ random_joke = client.RandomJoke
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | Yes |  |
-| `punchline` | ``$STRING`` | Yes |  |
-| `setup` | ``$STRING`` | Yes |  |
-| `type` | ``$STRING`` | Yes |  |
+| `id` | `Integer` | Yes |  |
+| `punchline` | `String` | Yes |  |
+| `setup` | `String` | Yes |  |
+| `type` | `String` | Yes |  |
 
 ### Operations
 

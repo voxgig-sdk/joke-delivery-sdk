@@ -21,10 +21,10 @@ class RandomJoke
     public string $type;
 }
 
-/** Match filter for RandomJoke#load (any subset of RandomJoke fields). */
+/** Request payload for RandomJoke#load. */
 class RandomJokeLoadMatch
 {
-    public ?int $id = null;
+    public int $id;
     public ?string $punchline = null;
     public ?string $setup = null;
     public ?string $type = null;

@@ -8,7 +8,7 @@ Complete API reference for the JokeDelivery PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/joke-delivery_sdk.php';
+require_once __DIR__ . '/jokedelivery_sdk.php';
 
 $client = new JokeDeliverySDK($options);
 ```
@@ -45,11 +45,11 @@ $client = JokeDeliverySDK::test();
 
 Create a new `RandomJokeEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): JokeDeliveryUtility`
 
 Return a copy of the SDK utility object.
 
@@ -92,10 +92,10 @@ $random_joke = $client->RandomJoke();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | Yes |  |
-| `punchline` | ``$STRING`` | Yes |  |
-| `setup` | ``$STRING`` | Yes |  |
-| `type` | ``$STRING`` | Yes |  |
+| `id` | `int` | Yes |  |
+| `punchline` | `string` | Yes |  |
+| `setup` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -109,19 +109,19 @@ $result = $client->RandomJoke()->load(["id" => "random_joke_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -130,7 +130,7 @@ Set the entity match criteria.
 Create a new `RandomJokeEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

@@ -116,10 +116,10 @@ const random_joke = client.RandomJoke()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | Yes |  |
-| `punchline` | ``$STRING`` | Yes |  |
-| `setup` | ``$STRING`` | Yes |  |
-| `type` | ``$STRING`` | Yes |  |
+| `id` | `number` | Yes |  |
+| `punchline` | `string` | Yes |  |
+| `setup` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -128,7 +128,7 @@ const random_joke = client.RandomJoke()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.RandomJoke().load({ id: 'random_joke_id' })
+const result = await client.RandomJoke().load({ id: 1 })
 ```
 
 ### Common Methods

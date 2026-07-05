@@ -16,10 +16,9 @@ type RandomJoke struct {
 	Type string `json:"type"`
 }
 
-// RandomJokeLoadMatch mirrors the random_joke fields as an all-optional match
-// filter (Go analog of Partial<RandomJoke>).
+// RandomJokeLoadMatch is the typed request payload for RandomJoke.LoadTyped.
 type RandomJokeLoadMatch struct {
-	Id *int `json:"id,omitempty"`
+	Id int `json:"id"`
 	Punchline *string `json:"punchline,omitempty"`
 	Setup *string `json:"setup,omitempty"`
 	Type *string `json:"type,omitempty"`

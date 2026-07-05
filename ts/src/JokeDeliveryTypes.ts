@@ -12,5 +12,10 @@ export interface RandomJoke {
   type: string
 }
 
-export type RandomJokeLoadMatch = Partial<RandomJoke>
+export interface RandomJokeLoadMatch {
+  id: number
+  punchline?: string
+  setup?: string
+  type?: string
+}
 

@@ -29,10 +29,10 @@ RandomJoke = Struct.new(
   keyword_init: true
 )
 
-# Match filter for RandomJoke#load (any subset of RandomJoke fields).
+# Request payload for RandomJoke#load.
 #
 # @!attribute [rw] id
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] punchline
 #   @return [String, nil]

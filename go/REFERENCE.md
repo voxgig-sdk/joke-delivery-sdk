@@ -97,10 +97,10 @@ random_joke := client.RandomJoke(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | Yes |  |
-| `punchline` | ``$STRING`` | Yes |  |
-| `setup` | ``$STRING`` | Yes |  |
-| `type` | ``$STRING`` | Yes |  |
+| `id` | `int` | Yes |  |
+| `punchline` | `string` | Yes |  |
+| `setup` | `string` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 

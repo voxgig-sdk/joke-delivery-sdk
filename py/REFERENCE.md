@@ -8,7 +8,7 @@ Complete API reference for the JokeDelivery Python SDK.
 ### Constructor
 
 ```python
-from joke-delivery_sdk import JokeDeliverySDK
+from jokedelivery_sdk import JokeDeliverySDK
 
 client = JokeDeliverySDK(options)
 ```
@@ -87,10 +87,10 @@ random_joke = client.RandomJoke()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | Yes |  |
-| `punchline` | ``$STRING`` | Yes |  |
-| `setup` | ``$STRING`` | Yes |  |
-| `type` | ``$STRING`` | Yes |  |
+| `id` | `int` | Yes |  |
+| `punchline` | `str` | Yes |  |
+| `setup` | `str` | Yes |  |
+| `type` | `str` | Yes |  |
 
 ### Operations
 

@@ -13,6 +13,10 @@
 ---@field type string
 
 ---@class RandomJokeLoadMatch
+---@field id number
+---@field punchline? string
+---@field setup? string
+---@field type? string
 
 local M = {}
 

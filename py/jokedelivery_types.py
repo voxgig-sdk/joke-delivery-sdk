@@ -23,8 +23,11 @@ class RandomJoke(TypedDict):
     type: str
 
 
-class RandomJokeLoadMatch(TypedDict, total=False):
+class RandomJokeLoadMatchRequired(TypedDict):
     id: int
+
+
+class RandomJokeLoadMatch(RandomJokeLoadMatchRequired, total=False):
     punchline: str
     setup: str
     type: str
