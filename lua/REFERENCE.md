@@ -102,7 +102,7 @@ local random_joke = client:RandomJoke(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:RandomJoke():load({ id = "random_joke_id" })
+local result, err = client:RandomJoke():load({ id = 1 })
 ```
 
 ### Common Methods

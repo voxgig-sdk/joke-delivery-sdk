@@ -36,7 +36,7 @@ local client = sdk.new()
 ### 3. Load a randomjoke
 
 ```lua
-local randomjoke, err = client:RandomJoke():load({ id = "example_id" })
+local randomjoke, err = client:RandomJoke():load({ id = 1 })
 if err then error(err) end
 print(randomjoke)
 ```
@@ -261,7 +261,7 @@ Create an instance: `local random_joke = client:RandomJoke(nil)`
 #### Example: Load
 
 ```lua
-local random_joke, err = client:RandomJoke():load({ id = "random_joke_id" })
+local random_joke, err = client:RandomJoke():load({ id = 1 })
 ```
 
 

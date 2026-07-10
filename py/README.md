@@ -42,7 +42,7 @@ client = JokeDeliverySDK()
 
 ```python
 try:
-    randomjoke = client.RandomJoke().load({"id": "example_id"})
+    randomjoke = client.RandomJoke().load({"id": 1})
     print(randomjoke)
 except Exception as err:
     print(f"load failed: {err}")
@@ -276,7 +276,7 @@ Create an instance: `random_joke = client.RandomJoke()`
 #### Example: Load
 
 ```python
-random_joke = client.RandomJoke().load({"id": "random_joke_id"})
+random_joke = client.RandomJoke().load({"id": 1})
 ```
 
 

@@ -50,12 +50,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // Load a single randomjoke — the value is the loaded record.
-    randomjoke, err := client.RandomJoke(nil).Load(map[string]any{"id": 1}, nil)
+    // Load a single randomJoke — the value is the loaded record.
+    randomJoke, err := client.RandomJoke(nil).Load(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(randomjoke)
+    fmt.Println(randomJoke)
 }
 ```
 
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-randomjoke, err := client.RandomJoke(nil).Load(
+randomJoke, err := client.RandomJoke(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(randomjoke) // the returned mock data
+fmt.Println(randomJoke) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -245,9 +245,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    randomjoke, err := client.RandomJoke(nil).Load(map[string]any{"id": "example_id"}, nil)
+    randomJoke, err := client.RandomJoke(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil { /* handle */ }
-    // randomjoke is the returned record
+    // randomJoke is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -274,7 +274,7 @@ API path: `/random_joke`
 
 ### RandomJoke
 
-Create an instance: `random_joke := client.RandomJoke(nil)`
+Create an instance: `randomJoke := client.RandomJoke(nil)`
 
 #### Operations
 
@@ -294,11 +294,11 @@ Create an instance: `random_joke := client.RandomJoke(nil)`
 #### Example: Load
 
 ```go
-random_joke, err := client.RandomJoke(nil).Load(map[string]any{"id": "random_joke_id"}, nil)
+randomJoke, err := client.RandomJoke(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(random_joke) // the loaded record
+fmt.Println(randomJoke) // the loaded record
 ```
 
 

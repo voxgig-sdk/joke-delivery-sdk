@@ -35,7 +35,7 @@ client = JokeDeliverySDK.new
 ```ruby
 begin
   # load returns the bare RandomJoke record (raises on error).
-  randomjoke = client.RandomJoke.load({ "id" => "example_id" })
+  randomjoke = client.RandomJoke.load({ "id" => 1 })
   puts randomjoke
 rescue => err
   warn "load failed: #{err}"
@@ -274,7 +274,7 @@ Create an instance: `random_joke = client.RandomJoke`
 
 ```ruby
 # load returns the bare RandomJoke record (raises on error).
-random_joke = client.RandomJoke.load({ "id" => "random_joke_id" })
+random_joke = client.RandomJoke.load({ "id" => 1 })
 ```
 
 

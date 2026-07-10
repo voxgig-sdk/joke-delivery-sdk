@@ -15,9 +15,9 @@ main: {
           url: "https://official-joke-api.appspot.com"
         }
       ]
+      summary: "This API provides random jokes, making it easy for developers to integrate humor into their applications."
       title: "Joke Delivery API"
       version: "1.0.0"
+      website: "https://official-joke-api.appspot.com"
     }
   }
-}
-

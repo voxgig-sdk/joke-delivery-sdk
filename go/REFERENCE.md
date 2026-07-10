@@ -90,7 +90,8 @@ same parameters as `Direct()`.
 ## RandomJokeEntity
 
 ```go
-random_joke := client.RandomJoke(nil)
+randomJoke := client.RandomJoke(nil)
+fmt.Println(randomJoke.GetName()) // "random_joke"
 ```
 
 ### Fields
@@ -109,7 +110,11 @@ random_joke := client.RandomJoke(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.RandomJoke(nil).Load(map[string]any{"id": "random_joke_id"}, nil)
+result, err := client.RandomJoke(nil).Load(map[string]any{"id": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

@@ -104,7 +104,7 @@ $random_joke = $client->RandomJoke();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->RandomJoke()->load(["id" => "random_joke_id"]);
+$result = $client->RandomJoke()->load(["id" => 1]);
 ```
 
 ### Common Methods

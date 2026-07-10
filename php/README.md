@@ -36,7 +36,7 @@ $client = new JokeDeliverySDK();
 ```php
 try {
     // load() returns the bare RandomJoke record (throws on error).
-    $randomjoke = $client->RandomJoke()->load(["id" => "example_id"]);
+    $randomjoke = $client->RandomJoke()->load(["id" => 1]);
     print_r($randomjoke);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -284,7 +284,7 @@ Create an instance: `$random_joke = $client->RandomJoke();`
 
 ```php
 // load() returns the bare RandomJoke record (throws on error).
-$random_joke = $client->RandomJoke()->load(["id" => "random_joke_id"]);
+$random_joke = $client->RandomJoke()->load(["id" => 1]);
 ```
 
 
