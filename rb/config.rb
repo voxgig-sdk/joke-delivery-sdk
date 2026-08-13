@@ -63,6 +63,7 @@ module JokeDeliveryConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random_joke",
                   "parts" => [

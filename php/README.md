@@ -35,7 +35,7 @@ $client = new JokeDeliverySDK();
 
 ```php
 try {
-    // load() returns the bare RandomJoke record (throws on error).
+    // load() returns the ENTITY — call data_get() for the RandomJoke record (throws on error).
     $randomjoke = $client->RandomJoke()->load(["id" => 1]);
     print_r($randomjoke);
 } catch (\Throwable $err) {
@@ -126,7 +126,8 @@ $client = JokeDeliverySDK::test([
     "entity" => ["randomjoke" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $randomjoke = $client->RandomJoke()->load(["id" => "test01"]);
 print_r($randomjoke);
 ```
@@ -225,7 +226,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -283,7 +284,7 @@ Create an instance: `$random_joke = $client->RandomJoke();`
 #### Example: Load
 
 ```php
-// load() returns the bare RandomJoke record (throws on error).
+// load() returns the ENTITY — call data_get() for the RandomJoke record (throws on error).
 $random_joke = $client->RandomJoke()->load(["id" => 1]);
 ```
 

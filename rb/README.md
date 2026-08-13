@@ -34,7 +34,7 @@ client = JokeDeliverySDK.new
 
 ```ruby
 begin
-  # load returns the bare RandomJoke record (raises on error).
+  # load returns the ENTITY — call data_get for the RandomJoke record (raises on error).
   randomjoke = client.RandomJoke.load({ "id" => 1 })
   puts randomjoke
 rescue => err
@@ -120,7 +120,8 @@ client = JokeDeliverySDK.test({
   "entity" => { "randomjoke" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 randomjoke = client.RandomJoke.load({ "id" => "test01" })
 puts randomjoke
 ```
@@ -273,7 +274,7 @@ Create an instance: `random_joke = client.RandomJoke`
 #### Example: Load
 
 ```ruby
-# load returns the bare RandomJoke record (raises on error).
+# load returns the ENTITY — call data_get for the RandomJoke record (raises on error).
 random_joke = client.RandomJoke.load({ "id" => 1 })
 ```
 

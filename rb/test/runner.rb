@@ -23,8 +23,8 @@ module JokeDeliveryTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("JOKEDELIVERY_TEST_LIVE")
-    override = getenv("JOKEDELIVERY_TEST_OVERRIDE")
+    live = getenv("JOKE_DELIVERY_TEST_LIVE")
+    override = getenv("JOKE_DELIVERY_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module JokeDeliveryTestRunner
       end
     end
 
-    explain = getenv("JOKEDELIVERY_TEST_EXPLAIN")
-    m["JOKEDELIVERY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("JOKE_DELIVERY_TEST_EXPLAIN")
+    m["JOKE_DELIVERY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

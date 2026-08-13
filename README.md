@@ -23,7 +23,7 @@ support (`load`):
 
 ```ts
 const client = new JokeDeliverySDK()
-const randomjoke = await client.RandomJoke().load()
+const randomjoke = await client.RandomJoke().load({ id: 1 })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = JokeDeliverySDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = JokeDeliverySDK.test({
+  entity: {
+    random_joke: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const randomjoke = await client.RandomJoke().load({ id: 1 })
-// randomjoke is a bare RandomJoke populated with mock data
+// randomjoke is the RandomJoke entity, populated with mock data
+// — call randomjoke.data() for the record itself
 console.log(randomjoke)
 ```
 
@@ -182,7 +191,7 @@ require_once 'jokedelivery_sdk.php';
 $client = new JokeDeliverySDK();
 
 
-// Load a specific randomjoke (returns the bare record; throws on error)
+// Load a specific randomjoke (returns the ENTITY; call data_get() for the record; throws on error)
 $randomjoke = $client->RandomJoke()->load(["id" => 1]);
 print_r($randomjoke);
 ```
@@ -210,7 +219,7 @@ require_relative "JokeDelivery_sdk"
 client = JokeDeliverySDK.new
 
 
-# Load a specific randomjoke (returns the bare record; raises on error)
+# Load a specific randomjoke (returns the ENTITY; call data_get for the record)
 randomjoke = client.RandomJoke.load({ "id" => 1 })
 puts randomjoke
 ```
@@ -344,6 +353,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://official-joke-api.appspot.com](https://official-joke-api.appspot.com)
 
