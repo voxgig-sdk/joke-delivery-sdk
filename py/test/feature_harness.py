@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from jokedelivery_sdk.config import make_config
+from jokedelivery_sdk.config import shared_config
 from jokedelivery_sdk.features import _make_feature
 from jokedelivery_sdk.core.control import JokeDeliveryControl
 from jokedelivery_sdk.core.error import JokeDeliveryError
@@ -24,7 +24,7 @@ from jokedelivery_sdk.core.spec import JokeDeliverySpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

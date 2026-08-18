@@ -40,7 +40,7 @@ class JokeDeliverySDK
         $utility = new JokeDeliveryUtility();
         $this->_utility = $utility;
 
-        $config = JokeDeliveryConfig::make_config();
+        $config = JokeDeliveryConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

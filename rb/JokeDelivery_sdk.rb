@@ -28,7 +28,7 @@ class JokeDeliverySDK
     utility = JokeDeliveryUtility.new
     @_utility = utility
 
-    config = JokeDeliveryConfig.make_config
+    config = JokeDeliveryConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
