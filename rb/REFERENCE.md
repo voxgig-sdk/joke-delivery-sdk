@@ -93,10 +93,10 @@ random_joke = client.RandomJoke
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `Integer` | Yes |  |
-| `punchline` | `String` | Yes |  |
-| `setup` | `String` | Yes |  |
-| `type` | `String` | Yes |  |
+| `id` | `Integer` | Yes | Unique identifier for the joke |
+| `punchline` | `String` | Yes | The punchline or answer part of the joke |
+| `setup` | `String` | Yes | The setup or question part of the joke |
+| `type` | `String` | Yes | The category or type of joke |
 
 ### Operations
 

@@ -92,10 +92,10 @@ $random_joke = $client->RandomJoke();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | Yes |  |
-| `punchline` | `string` | Yes |  |
-| `setup` | `string` | Yes |  |
-| `type` | `string` | Yes |  |
+| `id` | `int` | Yes | Unique identifier for the joke |
+| `punchline` | `string` | Yes | The punchline or answer part of the joke |
+| `setup` | `string` | Yes | The setup or question part of the joke |
+| `type` | `string` | Yes | The category or type of joke |
 
 ### Operations
 

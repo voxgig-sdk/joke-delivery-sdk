@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "JokeDelivery",
+            "slug": "joke-delivery",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -51,21 +54,25 @@ def make_config():
           {
             "name": "id",
             "req": True,
+            "short": "Unique identifier for the joke",
             "type": "`$INTEGER`",
           },
           {
             "name": "punchline",
             "req": True,
+            "short": "The punchline or answer part of the joke",
             "type": "`$STRING`",
           },
           {
             "name": "setup",
             "req": True,
+            "short": "The setup or question part of the joke",
             "type": "`$STRING`",
           },
           {
             "name": "type",
             "req": True,
+            "short": "The category or type of joke",
             "type": "`$STRING`",
           },
         ],

@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "JokeDelivery",
+      slug = "joke-delivery",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -30,21 +33,25 @@ local function make_config()
           {
             ["name"] = "id",
             ["req"] = true,
+            ["short"] = "Unique identifier for the joke",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "punchline",
             ["req"] = true,
+            ["short"] = "The punchline or answer part of the joke",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "setup",
             ["req"] = true,
+            ["short"] = "The setup or question part of the joke",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "type",
             ["req"] = true,
+            ["short"] = "The category or type of joke",
             ["type"] = "`$STRING`",
           },
         },
