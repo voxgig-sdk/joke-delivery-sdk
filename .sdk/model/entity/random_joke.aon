@@ -44,8 +44,10 @@ main: kit: entity: random_joke: {
         {
           method: "GET"
           orig: "/random_joke"
-          parts: [
-            "random_joke"
+          segments: [
+            {
+              lit: "random_joke"
+            }
           ]
           transform: {
             req: "`reqdata`"
