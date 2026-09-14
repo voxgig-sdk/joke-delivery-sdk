@@ -105,7 +105,7 @@ local result, err = client:RandomJoke():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
+| TypeScript | `@voxgig-sdk/joke-delivery-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
 | Python | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
 | PHP | `voxgig-sdk/joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/joke-delivery-sdk/go` | `go get github.com/voxgig-sdk/joke-delivery-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:RandomJoke():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { JokeDeliverySDK } from '@voxgig-sdk/joke-delivery'
+import { JokeDeliverySDK } from '@voxgig-sdk/joke-delivery-sdk'
 
 const client = new JokeDeliverySDK()
 
