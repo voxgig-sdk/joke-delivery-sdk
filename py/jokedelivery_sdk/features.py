@@ -1,12 +1,18 @@
 # JokeDelivery SDK feature factory
 
 from jokedelivery_sdk.feature.base_feature import JokeDeliveryBaseFeature
+from jokedelivery_sdk.feature.ratelimit_feature import JokeDeliveryRatelimitFeature
+from jokedelivery_sdk.feature.retry_feature import JokeDeliveryRetryFeature
 from jokedelivery_sdk.feature.test_feature import JokeDeliveryTestFeature
+from jokedelivery_sdk.feature.timeout_feature import JokeDeliveryTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: JokeDeliveryBaseFeature(),
+    "ratelimit": lambda: JokeDeliveryRatelimitFeature(),
+    "retry": lambda: JokeDeliveryRetryFeature(),
     "test": lambda: JokeDeliveryTestFeature(),
+    "timeout": lambda: JokeDeliveryTimeoutFeature(),
 }
 
 

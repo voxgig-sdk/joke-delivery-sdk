@@ -29,5 +29,65 @@
         "type": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /random_joke": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getRandomJoke",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 170,
+                  "punchline": "Bark bark.",
+                  "setup": "What did the dog say to the two trees?",
+                  "type": "general"
+                },
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "Unique identifier for the joke",
+                      "example": 170,
+                      "type": "integer"
+                    },
+                    "punchline": {
+                      "description": "The punchline or answer part of the joke",
+                      "example": "Bark bark.",
+                      "type": "string"
+                    },
+                    "setup": {
+                      "description": "The setup or question part of the joke",
+                      "example": "What did the dog say to the two trees?",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "The category or type of joke",
+                      "example": "general",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "setup",
+                    "punchline",
+                    "id"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with a random joke"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
