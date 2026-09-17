@@ -105,12 +105,12 @@ local result, err = client:RandomJoke():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/joke-delivery-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
-| Python | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
-| PHP | `voxgig-sdk/joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
+| TypeScript | `@voxgig-sdk/joke-delivery-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/tags) |
+| Python | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/tags) |
+| PHP | `voxgig-sdk/joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/joke-delivery-sdk/go` | `go get github.com/voxgig-sdk/joke-delivery-sdk/go@latest` |
-| Ruby | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
-| Lua | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/releases) |
+| Ruby | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/tags) |
+| Lua | `voxgig-sdk-joke-delivery` | publish pending — [install from git tag](https://github.com/voxgig-sdk/joke-delivery-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/joke-delivery-sdk/go-cli` | `go install github.com/voxgig-sdk/joke-delivery-sdk/go-cli/cmd/joke-delivery@latest` |
 | Go MCP server | `github.com/voxgig-sdk/joke-delivery-sdk/go-mcp` | `go get github.com/voxgig-sdk/joke-delivery-sdk/go-mcp@latest` |
 
