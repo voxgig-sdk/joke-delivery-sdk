@@ -91,27 +91,31 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
+						"type": "`$INTEGER`",
 						"req": true,
 						"short": "Unique identifier for the joke",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "punchline",
+						"title": "Punchline",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The punchline or answer part of the joke",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "setup",
+						"title": "Setup",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The setup or question part of the joke",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The category or type of joke",
-						"type": "`$STRING`",
 					},
 				},
 				"id": map[string]any{
@@ -125,7 +129,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/random_joke",
@@ -134,14 +137,16 @@ func MakeConfig() map[string]any {
 										"lit": "random_joke",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"random_joke",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"random_joke",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},

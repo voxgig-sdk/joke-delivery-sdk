@@ -1,0 +1,72 @@
+# Entity: random_joke
+
+main: kit: entity: random_joke: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "Unique identifier for the joke"
+      t: "`$INTEGER`"
+    }
+    punchline: {
+      h: "Punchline"
+      n: "punchline"
+      r: true
+      sh: "The punchline or answer part of the joke"
+      t: "`$STRING`"
+    }
+    setup: {
+      h: "Setup"
+      n: "setup"
+      r: true
+      sh: "The setup or question part of the joke"
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: true
+      sh: "The category or type of joke"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "random_joke"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /random_joke"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/random_joke"
+          s: [
+            {
+              lit: "random_joke"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

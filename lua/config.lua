@@ -87,27 +87,31 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
+            ["title"] = "Id",
+            ["type"] = "`$INTEGER`",
             ["req"] = true,
             ["short"] = "Unique identifier for the joke",
-            ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "punchline",
+            ["title"] = "Punchline",
+            ["type"] = "`$STRING`",
             ["req"] = true,
             ["short"] = "The punchline or answer part of the joke",
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "setup",
+            ["title"] = "Setup",
+            ["type"] = "`$STRING`",
             ["req"] = true,
             ["short"] = "The setup or question part of the joke",
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "type",
+            ["title"] = "Type",
+            ["type"] = "`$STRING`",
             ["req"] = true,
             ["short"] = "The category or type of joke",
-            ["type"] = "`$STRING`",
           },
         },
         ["id"] = {
@@ -121,7 +125,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random_joke",
@@ -130,14 +133,16 @@ local function make_config()
                     ["lit"] = "random_joke",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "random_joke",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "random_joke",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },

@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -139,27 +132,31 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
+          "type": "`$INTEGER`",
           "req": true,
-          "short": "Unique identifier for the joke",
-          "type": "`$INTEGER`"
+          "short": "Unique identifier for the joke"
         },
         {
           "name": "punchline",
+          "title": "Punchline",
+          "type": "`$STRING`",
           "req": true,
-          "short": "The punchline or answer part of the joke",
-          "type": "`$STRING`"
+          "short": "The punchline or answer part of the joke"
         },
         {
           "name": "setup",
+          "title": "Setup",
+          "type": "`$STRING`",
           "req": true,
-          "short": "The setup or question part of the joke",
-          "type": "`$STRING`"
+          "short": "The setup or question part of the joke"
         },
         {
           "name": "type",
+          "title": "Type",
+          "type": "`$STRING`",
           "req": true,
-          "short": "The category or type of joke",
-          "type": "`$STRING`"
+          "short": "The category or type of joke"
         }
       ],
       "id": {
@@ -173,7 +170,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/random_joke",
@@ -182,14 +178,16 @@ class Config {
                   "lit": "random_joke"
                 }
               ],
-              "select": {},
+              "parts": [
+                "random_joke"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "random_joke"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }

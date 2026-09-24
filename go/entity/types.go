@@ -1,7 +1,7 @@
 // Typed models for the JokeDelivery SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,10 +14,6 @@ import (
 
 // RandomJoke is the typed data model for the random_joke entity.
 type RandomJoke struct {
-	Id int `json:"id"`
-	Punchline string `json:"punchline"`
-	Setup string `json:"setup"`
-	Type string `json:"type"`
 }
 
 // RandomJokeLoadMatch is the typed request payload for RandomJoke.LoadTyped.
