@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/joke-delivery-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/joke-delivery-sdk/releases](https://github.com/voxgig-sdk/joke-delivery-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/joke-delivery-sdk
+composer config repositories.joke-delivery-sdk path ./joke-delivery-sdk/php
+composer require voxgig-sdk/joke-delivery-sdk:@dev
+```
 
 
 ## Tutorial: your first API call

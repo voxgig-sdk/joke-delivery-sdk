@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 JokeDeliveryUtility.registrar = ->(u) {
   u.clean = JokeDeliveryUtilities::Clean
+  u.clean_add = JokeDeliveryUtilities::CleanAdd
+  u.clean_explain = JokeDeliveryUtilities::CleanExplain
   u.done = JokeDeliveryUtilities::Done
   u.make_error = JokeDeliveryUtilities::MakeError
   u.feature_add = JokeDeliveryUtilities::FeatureAdd

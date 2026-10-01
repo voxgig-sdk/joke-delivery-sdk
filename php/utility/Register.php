@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 JokeDeliveryUtility::setRegistrar(function (JokeDeliveryUtility $u): void {
     $u->clean = [JokeDeliveryClean::class, 'call'];
+    $u->clean_add = [JokeDeliveryClean::class, 'add'];
+    $u->clean_explain = [JokeDeliveryDone::class, 'clean_explain'];
     $u->done = [JokeDeliveryDone::class, 'call'];
     $u->make_error = [JokeDeliveryMakeError::class, 'call'];
     $u->feature_add = [JokeDeliveryFeatureAdd::class, 'call'];
