@@ -1,10 +1,14 @@
 # joke-delivery-mcp
 
 [MCP](https://modelcontextprotocol.io) server exposing the JokeDelivery SDK as
-two agent tools — `joke-delivery_list` and `joke-delivery_load` — built on the
+1 agent tool, `joke-delivery_load`, built on the
 [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and the
 sibling Go SDK at `../go`. Runs over **stdio** (default, for spawnable installs)
 or **streamable HTTP** (one shared server for several agents).
+
+The server only reads. Create, update, patch and remove become tools too when the
+SDK's own model sets `main: kit: target: 'go-mcp': tool: write: true`; they are off by default, as an agent calling
+them changes the API's data.
 
 ## Examples
 
@@ -26,11 +30,7 @@ claude mcp add --scope user joke-delivery \
 Tool-call arguments (what an agent sends):
 
 ```jsonc
-// joke-delivery_list: first page of records
-{ "entity": "random_joke" }
-{ "entity": "random_joke", "query": { } }
-
-// joke-delivery_load: one record by id
+// joke-delivery_load: one record
 { "entity": "random_joke", "query": { "id": 1 } }
 ```
 
@@ -59,9 +59,9 @@ Tool-call arguments (what an agent sends):
      -- "$PWD"/dist/*/joke-delivery-mcp -transport stdio
    ```
 
-4. **Restart Claude Code.** The `joke-delivery_list` and `joke-delivery_load` tools now appear
-   in new sessions. Ask the agent to *"list random_joke using joke-delivery"*
-   and it calls `joke-delivery_list` with `{"entity":"random_joke"}`.
+4. **Restart Claude Code.** The `joke-delivery_load` tool now appear in new
+   sessions. Ask the agent to *"load random_joke using joke-delivery"*
+   and it calls `joke-delivery_load` with `{"entity":"random_joke","query":{"id":1}}`.
 
 ## How-to guides
 
@@ -86,22 +86,21 @@ environment) so every tool call is authenticated.
 Streamable HTTP lets several agents share one running process; stdio (the
 default) spawns a fresh process per client.
 
-### Call the `joke-delivery_list` tool
-
-Args: `entity` (required), `query` (optional filter map). Returns the first
-page of records as JSON:
-
-```jsonc
-{ "entity": "random_joke" }
-```
-
 ### Call the `joke-delivery_load` tool
 
-Args: `entity` (required), `query` = `{"id":N}` (required). Returns the single
-record as JSON:
+Args: `entity` (required), `query` (required: match map naming the record, such as {"id":1}).
+Returns the record as JSON:
 
 ```jsonc
 { "entity": "random_joke", "query": { "id": 1 } }
+```
+
+### Turn on the write tools
+
+In the SDK's own model (`.sdk/model/sdk.aontu`), then regenerate:
+
+```
+main: kit: target: 'go-mcp': tool: write: true
 ```
 
 ### Cross-compile release binaries
@@ -115,25 +114,26 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 
 ### Tools
 
-| Tool | Args | Returns |
-|------|------|---------|
-| `joke-delivery_list` | `entity` (required), `query` (optional map) | First page of records as JSON |
-| `joke-delivery_load` | `entity` (required), `query` = `{id:N}` | Single record as JSON |
+| Tool | Args | Returns | MCP hints |
+|------|------|---------|-----------|
+| `joke-delivery_load` | `entity`, `query` (required map) | The record as JSON | read-only |
 
 On error, a tool returns an MCP error result (`isError: true`) whose text is the
 failure message (e.g. unknown entity, or an API error).
 
-### `Args` schema
+### Entities
 
-Both tools take the same argument object:
+Each tool takes as its `entity` argument one of the entities that has its
+operation, of the 1 the SDK has:
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `entity` | string | One of the 1 supported entities (see below). |
-| `query` | object | Optional match map. `{"id":N}` for load; omit or `{}` for list. |
+| Tool | Entities |
+|------|----------|
+| `joke-delivery_load` | random_joke |
 
-JSON schemas are emitted by the SDK from the `Args` struct's `json` /
-`jsonschema` tags — no schema is hand-written.
+JSON schemas are emitted by the SDK from each tool's argument struct's
+`json` / `jsonschema` tags — no schema is hand-written. Each tool's
+`entity` is an `enum` of the entities in its row, so the server refuses
+any other before it runs a call.
 
 ### Transports & flags
 
@@ -148,12 +148,6 @@ JSON schemas are emitted by the SDK from the `Args` struct's `json` /
 |----------|---------|
 | `JOKE_DELIVERY_APIKEY` | API key sent with every request. |
 | `JOKE_DELIVERY_BASE` | Optional override of the API base URL. |
-
-### Entities
-
-The 1 entity valid as the `entity` argument:
-
-random_joke
 
 ### Smoke test via HTTP (raw JSON-RPC)
 
@@ -181,9 +175,10 @@ curl -sN -X POST http://localhost:18080 \
 ### How tools map to the SDK
 
 `main.go` builds the SDK client (configured from the environment) and registers
-two tools. Each dispatches on the `entity` argument to the matching entity in
-the sibling Go SDK at `../go`, calls `List` or `Load`, unwraps the `Entity`
-wrappers to plain data, and returns it as pretty-printed JSON.
+one tool per operation the SDK's entities have. Each dispatches on the
+`entity` argument to the matching entity in the sibling Go SDK at `../go`,
+calls its operation, unwraps the `Entity` wrappers to plain data, and returns
+it as pretty-printed JSON.
 
 ### Why two transports
 
@@ -193,9 +188,10 @@ that many agents can share — handy for a long-lived deployment.
 
 ### Schema generation
 
-The input schema is derived from the `Args` Go struct's `json` / `jsonschema`
-tags at registration time, so the advertised tool schema can never drift from
-the code that consumes it.
+The input schema is derived from each tool's argument struct's `json` /
+`jsonschema` tags at registration time, so the advertised tool schema can
+never drift from the code that consumes it. The `entity` enum comes from the
+same list the tool is registered for.
 
 ## Generated by
 

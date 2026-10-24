@@ -53,6 +53,10 @@ main: kit: entity: random_joke: {
           }
           m: "GET"
           o: "/random_joke"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "random_joke"

@@ -3,5 +3,16 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Production server",
+      "Successful response with a random joke",
+      "The category or type of joke",
+      "The punchline or answer part of the joke",
+      "The setup or question part of the joke",
+      "This API provides random jokes, making it easy for developers to integrate humor into their applications. With a simple request, you can receive various types of jokes to engage users with lighthearted content.",
+      "Unique identifier for the joke"
+    ]
+  }
 }
